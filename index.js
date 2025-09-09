@@ -1,13 +1,21 @@
 const express = require("express");
+require('dotenv').config();
 const path = require("path");
 const mongoose = require('mongoose');
-
+const process = require('process');
+const cookieParser = require('cookie-parser');
 
 
 const userRoute = require('./routes/user');
+const blogRoute = require('./routes/blog');
+
+const Blog = require('./models/blog');
+const { checkAuthenticationCookie } = require("./middlewares/auth");
 
 
-mongoose.connect('mongodb://127.0.0.1:27017/blogify').then((e) => console.log("MongoDB connected"));
+mongoose.connect(process.env.MONGO_URI)
+    .then(() => console.log("✅ MongoDB connected"))
+    .catch((err) => console.error("❌ MongoDB connection error:", err));
 
 const app = express();
 const PORT = 8000;
@@ -17,11 +25,20 @@ app.set("views", path.resolve('./views'));
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(cookieParser());
+app.use(express.static(path.resolve('./public')));
+
+app.use(checkAuthenticationCookie("token"));
 
 
 app.use('/user', userRoute);
-app.get('/', (req, res) => {
-    res.render('home');
+app.use('/blog', blogRoute);
+app.get('/', async (req, res) => {
+    const allBlogs = await Blog.find({});
+    res.render('home', {
+        user: req.user,
+        blogs: allBlogs,
+    });
 })
 
 app.listen(PORT, () => {
