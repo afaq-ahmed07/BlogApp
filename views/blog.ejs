@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/head') %>
+    <title><%= blog.title %> - Blogify</title>
+</head>
+
+<body class="bg-light">
+    <%- include('./partials/navbar') %>
+
+    <!-- Blog Container -->
+    <div class="container mt-5">
+        <!-- Blog Header -->
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="fw-bold mb-3"><%= blog.title %></h1>
+
+                <!-- Author Info -->
+                <div class="d-flex align-items-center mb-4">
+                    <img src="<%= blog.createdBy.profileImageURL %>" 
+                         alt="author" 
+                         class="rounded-circle me-3" 
+                         style="width:50px; height:50px; object-fit:cover;">
+                    <div>
+                        <h6 class="mb-0 fw-semibold"><%= blog.createdBy.fullName %></h6>
+                        <small class="text-muted"><%= blog.createdAt.toDateString() %></small>
+                    </div>
+                </div>
+
+                <!-- Cover Image -->
+                <% if (blog.coverImageURL) { %>
+                    <img src="/<%= blog.coverImageURL %>" 
+                         class="img-fluid rounded-4 mb-4 shadow-sm" 
+                         alt="cover image">
+                <% } %>
+
+                <!-- Blog Body -->
+                <article class="fs-5 lh-lg text-dark mb-5" style="white-space: pre-line;">
+                    <%= blog.body %>
+                </article>
+            </div>
+        </div>
+
+        <!-- Comments Section -->
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h4 class="fw-bold mb-3">Comments (<%= comments.length %>)</h4>
+
+                <!-- Add Comment -->
+                <% if (locals.user) { %>
+                    <form action="/blog/comment/<%= blog._id %>" method="POST" class="mb-4">
+                        <div class="mb-3">
+                            <textarea class="form-control rounded-3 shadow-sm" 
+                                      id="content" rows="3" 
+                                      name="content"
+                                      placeholder="Join the discussion..."
+                                      required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary fw-semibold">Post Comment</button>
+                    </form>
+                <% } else { %>
+                    <p class="text-muted">You must <a href="/user/signin" class="fw-semibold">sign in</a> to comment.</p>
+                <% } %>
+
+                <!-- List of Comments -->
+                <div class="list-group">
+                    <% comments.forEach(comment => { %>
+                        <div class="list-group-item border-0 border-bottom py-3">
+                            <div class="d-flex align-items-center mb-2">
+                                <img src="<%= comment.createdBy?.profileImageURL || '/uploads/default.png' %>" 
+                                     alt="user" 
+                                     class="rounded-circle me-2" 
+                                     style="width:35px; height:35px; object-fit:cover;">
+                                <div>
+                                    <h6 class="mb-0 fw-semibold"><%= comment.createdBy?.fullName || "Anonymous" %></h6>
+                                    <small class="text-muted"><%= comment.createdAt.toDateString() %></small>
+                                </div>
+                            </div>
+                            <p class="mb-0"><%= comment.content %></p>
+                        </div>
+                    <% }) %>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('./partials/script') %>
+</body>
+</html>

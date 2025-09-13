@@ -26,12 +26,12 @@ const userSchema = new mongoose.Schema({
     },
     profileImageURL: {
         type: String,
-        default: '/Images/default.png'
+        default: 'images/default.png'
     }
 });
 userSchema.pre('save', function (next) {
     const user = this;
-    if (!user.isModified('password')) return;
+    if (!user.isModified('password')) return next();
     const salt = randomBytes(16).toString();
     const hashedPassword = createHmac('sha256', salt).update(user.password).digest('hex');
 
