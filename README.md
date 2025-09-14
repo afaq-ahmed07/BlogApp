@@ -20,18 +20,18 @@ Authentication and authorization are handled using **JWT**.
 ## 📂 Folder Structure
 
 Blogify/
-├── controllers/ # Route handler logic (user, blog, etc.)
-├── middlewares/ # Authentication & custom middlewares
-├── models/ # Mongoose models (User, Blog, Comment)
-├── public/ # Static files
-│ ├── Images/ # Default profile image
-│ └── uploads/ # Blog cover images uploaded by users
-├── routes/ # Application routes
-├── services/ # JWT & utility services
-├── views/ # EJS templates (pages, partials)
-├── package.json
-├── package-lock.json
-└── .env # Environment variables (not committed to Git)
+├── controllers/ # Route handler logic (user, blog, etc.)\n
+├── middlewares/ # Authentication & custom middlewares\n
+├── models/ # Mongoose models (User, Blog, Comment)\n
+├── public/ # Static files\n
+│ ├── Images/ # Default profile image\n
+│ └── uploads/ # Blog cover images uploaded by users\n
+├── routes/ # Application routes\n
+├── services/ # JWT & utility services\n
+├── views/ # EJS templates (pages, partials)\n
+├── package.json\n
+├── package-lock.json\n
+└── .env # Environment variables (not committed to Git)\n
 
 ---
 
