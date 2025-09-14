@@ -1,0 +1,64 @@
+<footer class="bg-dark text-light pt-5 pb-3 mt-5">
+    <div class="container">
+      <div class="row align-items-start">
+        
+        <!-- Brand / About -->
+        <div class="col-md-4 mb-4 mb-md-0">
+          <h3 class="fw-bold text-primary">Blogify</h3>
+          <p class="small">
+            Share your thoughts, ideas, and stories with the world.  
+            A modern blogging platform built with Node.js, Express, MongoDB, and EJS.
+          </p>
+        </div>
+  
+        <!-- Quick Links -->
+        <div class="col-md-4 mb-4 mb-md-0">
+          <h5 class="fw-semibold mb-3">Quick Links</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="/" class="text-light text-decoration-none footer-link">Home</a></li>
+            <li class="mb-2"><a href="/blog/add-new" class="text-light text-decoration-none footer-link">Write a Blog</a></li>
+            <% if (locals.user) { %>
+              <li class="mb-2"><a href="/user/logout" class="text-light text-decoration-none footer-link">Logout</a></li>
+            <% } else { %>
+              <li class="mb-2"><a href="/user/signin" class="text-light text-decoration-none footer-link">Sign In</a></li>
+              <li class="mb-2"><a href="/user/signup" class="text-light text-decoration-none footer-link">Sign Up</a></li>
+            <% } %>
+          </ul>
+        </div>
+  
+        <!-- Social Links -->
+        <div class="col-md-4">
+          <h5 class="fw-semibold mb-3">Connect With Us</h5>
+          <div class="d-flex gap-3">
+            <a href="#" class="social-link"><img src="/images/twitter.svg"></a>
+            <a href="#" class="social-link"><img src="/images/github.svg"></i></a>
+            <a href="#" class="social-link"><img src="/images/linkedin.svg"></a>
+            <a href="#" class="social-link"><img src="/images/instagram.svg"></a>
+          </div>
+        </div>
+      </div>
+  
+      <hr class="border-secondary my-4">
+  
+      <!-- Bottom Footer -->
+      <div class="text-center small text-muted">
+        © <%= new Date().getFullYear() %> <span class="fw-bold text-primary">Blogify</span>. All rights reserved.
+      </div>
+    </div>
+  </footer>
+  
+  <style>
+    .footer-link:hover {
+      color: #0d6efd; /* Bootstrap primary color */
+      transition: color 0.3s ease;
+    }
+    .social-link {
+      color: #adb5bd;
+      transition: all 0.3s ease;
+    }
+    .social-link:hover {
+      color: #0d6efd;
+      transform: translateY(-3px);
+    }
+  </style>
+  

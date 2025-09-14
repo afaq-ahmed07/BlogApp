@@ -23,6 +23,14 @@ router.get('/add-new', (req, res) => {
     });
 });
 
+router.get('/myBlogs',async (req,res)=>{
+    const myBlogs=await Blog.find({createdBy:req.user.id});
+    return res.render('myBlogs',{
+        user:req.user,
+        blogs:myBlogs,
+    })
+})
+
 router.post('/', upload.single('coverImage'), async (req, res) => {
     const { title, body } = req.body;
     const blog = await Blog.create({
@@ -43,6 +51,7 @@ router.get('/:id', async (req, res) => {
         comments,
     })
 });
+
 
 router.post('/comment/:blogId', async (req, res) => {
     await Comment.create({

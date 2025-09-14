@@ -36,7 +36,7 @@ app.use(checkAuthenticationCookie("token"));
 app.use('/user', userRoute);
 app.use('/blog', blogRoute);
 app.get('/', async (req, res) => {
-    const allBlogs = await Blog.find({});
+    const allBlogs = await Blog.find({}).populate('createdBy');
     res.render('home', {
         user: req.user,
         blogs: allBlogs,
