@@ -4,6 +4,10 @@ Blogify is a simple yet powerful blogging application built with **Node.js**, **
 It allows users to create accounts, sign in, write blogs, upload cover images, and comment on posts.  
 Authentication and authorization are handled using **JWT**.
 
+<img width="3514" height="2346" alt="Blogify-Home" src="https://github.com/user-attachments/assets/a582fccd-b889-4e5c-9e81-04dbe2502147" />
+
+![Blogify-Welcome](https://github.com/user-attachments/assets/b4ac9ebc-8b42-4b4c-948f-8737a7f5e386)
+
 ---
 
 ## ✨ Features
